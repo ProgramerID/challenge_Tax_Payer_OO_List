@@ -36,7 +36,7 @@ public class Program {
 		System.out.println();
 		int i = 1;
 		for (TaxPayer payer : list) {
-			System.out.println("Resume of " + i + "o TaxPayer");
+			System.out.println("Resume of " + i + "o TaxPayer:");
 			System.out.println(payer);
 			i++;
 		}

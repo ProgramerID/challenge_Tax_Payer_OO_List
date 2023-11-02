@@ -2,18 +2,18 @@ package entities;
 
 public class TaxPayer {
 	
-	private double salaryIncome;
-	private double servicesIncome;
-	private double capitalIncome;
-	private double healthSpending;
-	private double educationSpending;
+	private Double salaryIncome;
+	private Double servicesIncome;
+	private Double capitalIncome;
+	private Double healthSpending;
+	private Double educationSpending;
 	
 	
 	public TaxPayer() {
 	}
 
-	public TaxPayer(double salaryIncome, double servicesIncome, double capitalIncome, double healthSpending,
-			double educationSpending) {
+	public TaxPayer(Double salaryIncome, Double servicesIncome, Double capitalIncome, Double healthSpending,
+			Double educationSpending) {
 		this.salaryIncome = salaryIncome;
 		this.servicesIncome = servicesIncome;
 		this.capitalIncome = capitalIncome;
@@ -21,91 +21,101 @@ public class TaxPayer {
 		this.educationSpending = educationSpending;
 	}
 
-	public double getSalaryIncome() {
+	public Double getSalaryIncome() {
 		return salaryIncome;
 	}
 
-	public void setSalaryIncome(double salaryIncome) {
+	public void setSalaryIncome(Double salaryIncome) {
 		this.salaryIncome = salaryIncome;
 	}
 
-	public double getServicesIncome() {
+	public Double getServicesIncome() {
 		return servicesIncome;
 	}
 
-	public void setServicesIncome(double servicesIncome) {
+	public void setServicesIncome(Double servicesIncome) {
 		this.servicesIncome = servicesIncome;
 	}
 
-	public double getCapitalIncome() {
+	public Double getCapitalIncome() {
 		return capitalIncome;
 	}
 
-	public void setCapitalIncome(double capitalIncome) {
+	public void setCapitalIncome(Double capitalIncome) {
 		this.capitalIncome = capitalIncome;
 	}
 
-	public double getHealthSpending() {
+	public Double getHealthSpending() {
 		return healthSpending;
 	}
 
-	public void setHealthSpending(double healthSpending) {
+	public void setHealthSpending(Double healthSpending) {
 		this.healthSpending = healthSpending;
 	}
 
-	public double getEducationSpending() {
+	public Double getEducationSpending() {
 		return educationSpending;
 	}
 
-	public void setEducationSpending(double educationSpending) {
+	public void setEducationSpending(Double educationSpending) {
 		this.educationSpending = educationSpending;
 	}
 	
-	public double salaryTax() {
-		 salaryIncome = salaryIncome / 12;
-		 if(salaryIncome > 5000) {
-			return (salaryIncome * 12) * 0.2;
-		 }else if (salaryIncome >= 3000 && salaryIncome <= 5000) {
-			 return (salaryIncome * 12) * 0.1;
+	public Double salaryTax() {
+		Double salaryTax;
+		 if(salaryIncome / 12 > 5000) {
+			salaryTax = salaryIncome * 0.2;
+		 }else if (salaryIncome / 12 >= 3000 && salaryIncome / 12 <= 5000) {
+			 salaryTax =  salaryIncome * 0.1;
 		 }else {
-			return salaryIncome = 0.0;
+			salaryTax =  salaryIncome ;
 		 }
+		 return salaryTax;
 	}
 	
-	public double servicesTax() {
-		if(servicesIncome != 0.0) {
-			return servicesIncome = servicesIncome * 0.15;
+	public Double servicesTax() {
+		Double services = 0.0;
+		if(servicesIncome > 0.0) {
+			services = servicesIncome * 0.15;
 		}else {
-			return 0.0;
+			services = 0.0;
 		}
+		return services;
+		
 	}
 	
-	public double capitalTax() {
-		if(capitalIncome != 0.0) {
-			return capitalIncome = capitalIncome * 0.2 ;
+	public Double capitalTax() {
+		Double capital = 0.0;
+		
+		if(capitalIncome > 0.0) {
+			capital = capitalIncome * 0.2 ;
 		}else {
-			return 0.0;
+			capital =  0.0;
 		}
+		
+		return capital;
 	}
 	
-	public double grossTax() {
-		double grossTax = salaryTax() + servicesTax() + capitalTax();;
+	public Double grossTax() {
+		Double grossTax = salaryTax() + servicesTax() + capitalTax();;
 		return grossTax;
 		
 	}
 	
-	public double taxRebate() {
-		double expensesDeduction = educationSpending + healthSpending;
-		double maxDeduction = grossTax() * 0.3;
+	public Double taxRebate() {
+		Double expensesDeduction = educationSpending + healthSpending;
+		Double maxDeduction = grossTax() * 0.3;
+		Double taxRebate = 0.0;
 		
-		if (maxDeduction > educationSpending + healthSpending) {
-			return expensesDeduction;
+		if (maxDeduction > expensesDeduction) {
+			taxRebate = expensesDeduction;
 		}else {
-			return maxDeduction;
+			taxRebate =  maxDeduction;
 		}
+		return taxRebate;
 	}
 	
-	public double netTax() {
+	public Double netTax() {
 		return grossTax() - taxRebate();
 	}
 	
